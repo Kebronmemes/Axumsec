@@ -89,7 +89,7 @@ Vulnerability #1: Information Disclosure via Product API
 Information Disclosure - Seller UUID Exposure
 
 2. Location in Code
-python
+```
 @app.route('/api/v1/products', methods=['GET'])
 def api_get_products():
     products = db.execute('''
@@ -99,6 +99,7 @@ def api_get_products():
         JOIN users u ON p.seller_uuid = u.uuid
         LIMIT ? OFFSET ?
     ''', (limit, offset)).fetchall()
+```
 3. Why it is Vulnerable
 The API endpoint returns full product listings including seller UUIDs in the JSON response. This exposes internal user identifiers that can be used in subsequent attacks. The endpoint requires no authentication, allowing anyone to enumerate all seller UUIDs.
 
